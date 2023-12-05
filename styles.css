@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content:center;
+}
+#calculator {
+    display: flex;
+    width: 400px;
+    height: 600px;
+    background-color: gray;
+    flex: 0 0 auto;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+#display {
+    display:flex;
+    width: 340px;
+    height: 100px;
+    flex: 0 0 auto;
+    background-color:white;
+    margin-top: 30px;
+}
+
+#buttons {
+    display:flex;
+    width: 340px;
+    height:410px;
+    margin-bottom: 30px;
+    margin-top:30px;
+    background: rgb(63, 63, 63);
+    flex-wrap:wrap;
+} 
