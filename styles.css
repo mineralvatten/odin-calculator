@@ -10,7 +10,12 @@ body {
     flex: 0 0 auto;
     flex-wrap:wrap;
     justify-content: center;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 16px;
 }
+
 #display {
     display:flex;
     width: 340px;
@@ -26,6 +31,6 @@ body {
     height:410px;
     margin-bottom: 30px;
     margin-top:30px;
-    background: rgb(63, 63, 63);
+    background: gray;
     flex-wrap:wrap;
 } 
