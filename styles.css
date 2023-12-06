@@ -18,14 +18,22 @@ body {
 
 #display {
     display:flex;
+    cursor: crosshair;
+    align-items: center;
+    font-size: 32px;
     width: 340px;
     height: 100px;
+    border: 2px;
+    background-color: rgb(86, 160, 86);
+    border-style: solid;
+    border-color: black;
+    border-radius: 8px;
     flex: 0 0 auto;
-    background-color:white;
     margin-top: 30px;
 }
 
 #buttons {
+    cursor:crosshair;
     display:flex;
     width: 340px;
     height:410px;
