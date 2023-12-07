@@ -1,6 +1,7 @@
 body {
     display: flex;
     justify-content:center;
+    background-color: rgb(127, 189, 127);
 }
 #calculator {
     display: flex;
@@ -20,7 +21,7 @@ body {
     display:flex;
     cursor: crosshair;
     align-items: center;
-    font-size: 32px;
+    font-size: 75px;
     width: 340px;
     height: 100px;
     border: 2px;
