@@ -42,11 +42,6 @@ function writeToDisplay(event) {
     }
 }
 function onOperatorClick(event) {
-    //if memory empty, display empty (unless using =), if something in memory
-/*     if (display.textContent != "") {
-        display.memory = display.textContent + event.target.textContent;
-        display.textContent = "";
-    } */
     operatorKey = event.target.textContent;
     switch (operatorKey) {
         case "CLR":
@@ -54,18 +49,22 @@ function onOperatorClick(event) {
             display.textContent = "";
             break;
         case "=":
-            if (display.memory.length > 0) {
-                console.log(display.memory);
+            if ((display.memory != "") && (display.textContent != "")) {
+                display.memory = operate(display.memory, Number(display.textContent), display.prevOperation);
+                display.prevOperation = "";
+                display.writeFlag = true;
+                display.textContent = display.memory;
             }
             break;
-        case "+":
+        default:
             if (display.textContent.length > 0) {
-                if (display.memory.length == 0) {
+                if (display.memory == undefined) {
                     display.memory = Number(display.textContent);
                     display.writeFlag = true;
                 }
                 else {
-                    display.memory += Number(display.textContent);
+                    display.memory = operate(Number(display.memory), Number(display.textContent), operatorKey);
+                    display.prevOperation = display.operationKey;
                     display.writeFlag = true;
                     display.textContent = display.memory;
                 }
