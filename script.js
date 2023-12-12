@@ -34,31 +34,38 @@ function clearDisplay() {
     display.textContent = "";
 }
 function writeToDisplay(event) {
+    if (event.name) {
+        key = event.name;
+    }
+    else {
+        key = event.target.textContent;
+    }
     if (display.textContent.length < 9) {
         if (display.writeFlag == true) {
             display.textContent = "";
             display.writeFlag= false;
         }
-        if ((event.target.textContent != ".") && (String(display.textContent) != "0")) {
-            display.textContent += event.target.textContent;
+        if ((key != ".") && (String(display.textContent) != "0")) {
+            display.textContent += key;
         }
-        else if (event.target.textContent == ".") {
+        else if (key == ".") {
             if ((display.textContent.length >= 1) && (display.textContent.includes(".") == false) && (display.textContent.length < 8)) {
-                display.textContent += event.target.textContent;
+                display.textContent += key;
             }
         }
         else if (String(display.textContent) == "0") {
-            if (event.target.textContent == ".") {
-                display.textContent += event.target.textContent;
+            if (key == ".") {
+                display.textContent += key;
             }
         }
     }
     else if ((display.textContent.length == 9) && (display.writeFlag == true)) {
         display.textContent = "";
         display.writeFlag= false;
-        display.textContent += event.target.textContent;
+        display.textContent += key;
     }
 }
+
 function memoryHandler(memory) {
     if (memory >= 999999999) {
         memory = parseFloat(memory.toPrecision(3)).toExponential();
@@ -75,7 +82,13 @@ function memoryHandler(memory) {
 }
 
 function onOperatorClick(event) {
-    operatorKey = event.target.textContent;
+    if (event.name) {
+        operatorKey = event.name;
+    }
+    else {
+        operatorKey = event.target.textContent;
+    }
+    console.log(operatorKey);
     switch (operatorKey) {
         case "\u25c0":
             if ((String(display.textContent).length > 0) && (display.textContent != "Failure")) {
@@ -228,6 +241,64 @@ function createButtons() {
     btn.textContent = "=";
 }
 createButtons()
-
+document.addEventListener('keydown', function(event) {
+    console.log(event.code);
+    if (event.code === "ArrowLeft") {
+        event.name = "\u25c0";
+        onOperatorClick(event);
+    }
+    else if (event.code === "Enter") {
+        event.name = "=";
+        onOperatorClick(event);
+    }
+    else if (event.code === "Minus") {
+        event.name = "+";
+        onOperatorClick(event);
+    }
+    else if (event.code === "Slash") {
+        event.name = "-";
+        onOperatorClick(event);
+    }
+    else if (event.code === "Slash") {
+        event.name = "-";
+        onOperatorClick(event);
+    }
+    else if (event.code == "Digit7" && (event.shiftKey)) {
+        event.name = "/"
+        onOperatorClick(event);
+    }
+    else if (event.code == "Backslash" && (event.shiftKey)) {
+        event.name = "*"
+        onOperatorClick(event);
+    }
+    else if (event.code.slice(0,-1) == "Digit") {
+        event.name = event.code.slice(-1);
+        writeToDisplay(event);
+    }
+    else if ((event.code.slice(0,-1) == "Numpad") && (event.code.length == 7)) {
+        event.name = event.code.slice(-1);
+        writeToDisplay(event);
+    }
+    else if (event.code === "NumpadEnter") {
+        event.name = "=";
+        onOperatorClick(event);
+    }
+    else if (event.code === "NumpadSubtract") {
+        event.name = "-";
+        onOperatorClick(event);
+    }
+    else if (event.code === "NumpadAdd") {
+        event.name = "+";
+        onOperatorClick(event);
+    }
+    else if (event.code === "NumpadMultiply") {
+        event.name = "*";
+        onOperatorClick(event);
+    }
+    else if (event.code === "NumpadDivide") {
+        event.name = "/";
+        onOperatorClick(event);
+    }
+})
 
     
