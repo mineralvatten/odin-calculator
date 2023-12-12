@@ -91,7 +91,14 @@ function onOperatorClick(event) {
     switch (operatorKey) {
         case "\u25c0":
             if ((String(display.textContent).length > 0) && (display.textContent != "Failure")) {
-                display.textContent = display.textContent.slice(0,-1);
+                if (display.textContent.includes('e')) {
+                    index = display.textContent.split('').findIndex((item) => item == 'e');
+                    display.textContent = display.textContent.slice(0,index);
+                }
+                else {
+                    display.textContent = display.textContent.slice(0,-1);
+                }
+                
             }
             break;
         case "CLR":
