@@ -27,7 +27,8 @@ let num2;
 let operator;
 const display = document.querySelector('#display');
 display.textContent = "";
-display.memory = "";
+display.textContent.maxLength = 9;
+display.memory = undefined;
 display.writeFlag = false;
 function clearDisplay() {
     display.textContent = "";
@@ -38,22 +39,60 @@ function writeToDisplay(event) {
             display.textContent = "";
             display.writeFlag= false;
         }
+        if ((event.target.textContent != ".") && (String(display.textContent) != "0")) {
+            display.textContent += event.target.textContent;
+        }
+        else if (event.target.textContent == ".") {
+            if ((display.textContent.length >= 1) && (display.textContent.includes(".") == false) && (display.textContent.length < 8)) {
+                display.textContent += event.target.textContent;
+            }
+        }
+        else if (String(display.textContent) == "0") {
+            if (event.target.textContent == ".") {
+                display.textContent += event.target.textContent;
+            }
+        }
+    }
+    else if ((display.textContent.length == 9) && (display.writeFlag == true)) {
+        display.textContent = "";
+        display.writeFlag= false;
         display.textContent += event.target.textContent;
     }
 }
+function memoryHandler(memory) {
+    if (memory >= 999999999) {
+        memory = parseFloat(memory.toPrecision(3)).toExponential();
+        display.textContent = memory;
+        display.memory = undefined;
+        return memory;
+    }
+    if (String(memory).length > 9) {
+        memory = Number(String(memory).substring(0,9));
+        
+        return memory;
+    }
+    return memory;
+}
+
 function onOperatorClick(event) {
     operatorKey = event.target.textContent;
     switch (operatorKey) {
         case "CLR":
-            display.memory = "";
+            display.memory = undefined;
             display.textContent = "";
             break;
         case "=":
-            if ((display.memory != "") && (display.textContent != "")) {
-                display.memory = operate(display.memory, Number(display.textContent), display.prevOperation);
-                display.prevOperation = "";
+            if ((Number(display.textContent) == 0) && (display.nextOperatorKey == "/")) {
+                display.textContent = "Failure";
+                display.memory = undefined;
+                display.writeFlag = true;
+            }
+            else if ((display.memory != undefined) && (display.textContent != "") && (display.nextOperatorKey)) {
+                display.memory = operate(display.memory, Number(display.textContent), display.nextOperatorKey);
+                display.memory = memoryHandler(display.memory);
                 display.writeFlag = true;
                 display.textContent = display.memory;
+                display.memory = undefined;
             }
             break;
         default:
@@ -61,12 +100,20 @@ function onOperatorClick(event) {
                 if (display.memory == undefined) {
                     display.memory = Number(display.textContent);
                     display.writeFlag = true;
+                    display.nextOperatorKey = operatorKey;
+                }
+                else if ((Number(display.textContent) == 0) && (operatorKey == "/")) {
+                    display.textContent = "Failure";
+                    display.memory = undefined;
+                    display.writeFlag = true;
                 }
                 else {
-                    display.memory = operate(Number(display.memory), Number(display.textContent), operatorKey);
+                    display.memory = operate(Number(display.memory), Number(display.textContent), display.nextOperatorKey);
+                    display.memory = memoryHandler(display.memory);
                     display.prevOperation = display.operationKey;
                     display.writeFlag = true;
                     display.textContent = display.memory;
+                    display.nextOperatorKey = operatorKey;
                 }
 
             }
