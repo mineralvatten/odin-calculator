@@ -88,7 +88,6 @@ function onOperatorClick(event) {
     else {
         operatorKey = event.target.textContent;
     }
-    console.log(operatorKey);
     switch (operatorKey) {
         case "\u25c0":
             if ((String(display.textContent).length > 0) && (display.textContent != "Failure")) {
@@ -242,9 +241,12 @@ function createButtons() {
 }
 createButtons()
 document.addEventListener('keydown', function(event) {
-    console.log(event.code);
     if (event.code === "ArrowLeft") {
         event.name = "\u25c0";
+        onOperatorClick(event);
+    }
+    else if (event.code === "Backspace") {
+        event.name = "CLR";
         onOperatorClick(event);
     }
     else if (event.code === "Enter") {
@@ -270,6 +272,10 @@ document.addEventListener('keydown', function(event) {
     else if (event.code == "Backslash" && (event.shiftKey)) {
         event.name = "*"
         onOperatorClick(event);
+    }
+    else if (event.code === "Period") {
+        event.name = "."
+        writeToDisplay(event);        
     }
     else if (event.code.slice(0,-1) == "Digit") {
         event.name = event.code.slice(-1);
