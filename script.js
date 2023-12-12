@@ -77,6 +77,11 @@ function memoryHandler(memory) {
 function onOperatorClick(event) {
     operatorKey = event.target.textContent;
     switch (operatorKey) {
+        case "\u25c0":
+            if ((String(display.textContent).length > 0) && (display.textContent != "Failure")) {
+                display.textContent = display.textContent.slice(0,-1);
+            }
+            break;
         case "CLR":
             display.memory = undefined;
             display.textContent = "";
@@ -148,7 +153,7 @@ function createButtons() {
                 btn.addEventListener('click', (event) => writeToDisplay(event));
                 break;
             case 15:
-                btn.textContent = "CLR";
+                btn.textContent = "\u25c0";
                 btn.addEventListener('click', (event) => onOperatorClick(event));
                 break;
             case 16:
@@ -190,7 +195,7 @@ function createButtons() {
     buttonDiv.appendChild(btn);
     btn.addEventListener('click', (event) => onOperatorClick(event));
     btn.style.fontSize= "16px";
-    btn.style.width = "167px";
+    btn.style.width = "166px";
     btn.style.height = "60px";
     btn.style.border = "1px";
     btn.style.margin = "1px";
@@ -202,10 +207,25 @@ function createButtons() {
     btn.style.alignContent = "center";
     btn.style.borderRadius = "4px";
     btn.style.justifyContent = "center";
-    btn.style.marginLeft = "85px"
+    //btn.style.marginLeft = "85px"
+    btn.textContent = "CLR";
+    btn = document.createElement('div');
+    buttonDiv.appendChild(btn);
+    btn.addEventListener('click', (event) => onOperatorClick(event));
+    btn.style.fontSize= "16px";
+    btn.style.width = "166px";
+    btn.style.height = "60px";
+    btn.style.border = "1px";
+    btn.style.margin = "1px";
+    btn.style.borderStyle = "solid";
+    btn.style.display = "flex";
+    btn.style.flexWrap = "wrap";
+    btn.style.fontSize = "32px";
+    btn.style.background = "rgb(50,50,50)";
+    btn.style.alignContent = "center";
+    btn.style.borderRadius = "4px";
+    btn.style.justifyContent = "center";
     btn.textContent = "=";
-    //btn.style.flex = "1 0 auto";
-    //btn.style.justify = "stretch";
 }
 createButtons()
 
