@@ -143,18 +143,22 @@ buttonDiv = document.querySelector("#buttons");
 function createButtons() {
     for (i = 1; i <= 16; i++) {
         btn = document.createElement('div');
+        btn.style.background = "rgb(50,50,50)";
         switch (i) {
             case 4:
                 btn.textContent = "+";
                 btn.addEventListener('click', (event) => onOperatorClick(event));
+                btn.style.background = "rgb(2,65,65)";
                 break;
             case 8:
                 btn.textContent = "-";
                 btn.addEventListener('click', (event) => onOperatorClick(event));
+                btn.style.background = "rgb(2,65,65)";
                 break;
             case 12:
                 btn.textContent = "*";
                 btn.addEventListener('click', (event) => onOperatorClick(event));
+                btn.style.background = "rgb(2,65,65)";
                 break;
             case 13:
                 btn.textContent = "0";
@@ -167,10 +171,12 @@ function createButtons() {
             case 15:
                 btn.textContent = "\u25c0";
                 btn.addEventListener('click', (event) => onOperatorClick(event));
+                btn.style.background = "rgb(2,65,65)";
                 break;
             case 16:
                 btn.textContent = "/";
                 btn.addEventListener('click', (event) => onOperatorClick(event));
+                btn.style.background = "rgb(2,65,65)";
                 break;
             default:
                 if ((i < 4) && (i>0)) {
@@ -196,7 +202,6 @@ function createButtons() {
         btn.style.display = "flex";
         btn.style.flexWrap = "wrap";
         btn.style.fontSize = "32px";
-        btn.style.background = "rgb(50,50,50)";
         btn.style.alignContent = "center";
         btn.style.borderRadius = "4px";
         btn.style.justifyContent = "center";
@@ -215,11 +220,10 @@ function createButtons() {
     btn.style.display = "flex";
     btn.style.flexWrap = "wrap";
     btn.style.fontSize = "32px";
-    btn.style.background = "rgb(50,50,50)";
+    btn.style.background = "rgb(2,65,65)";
     btn.style.alignContent = "center";
     btn.style.borderRadius = "4px";
     btn.style.justifyContent = "center";
-    //btn.style.marginLeft = "85px"
     btn.textContent = "CLR";
     btn = document.createElement('div');
     buttonDiv.appendChild(btn);
@@ -233,7 +237,7 @@ function createButtons() {
     btn.style.display = "flex";
     btn.style.flexWrap = "wrap";
     btn.style.fontSize = "32px";
-    btn.style.background = "rgb(50,50,50)";
+    btn.style.background = "rgb(2,65,65)";
     btn.style.alignContent = "center";
     btn.style.borderRadius = "4px";
     btn.style.justifyContent = "center";
